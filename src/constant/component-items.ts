@@ -71,10 +71,23 @@ export const initialTasksExploreItems: BlockItemType[] = [
     {title: "Generate Code", content: "Overview : the task generates app scaffolding."},
 ];
 
+export const welcomeTasksExploreItems: BlockItemType[] = [
+    {
+        title: "Install & Launch Copilot",
+        content: ""
+    },
+    {
+        title: "Generate Documentation",
+        content: ""
+    },
+    {title: "Generate Application", content: ""},
+];
+
 export const welcomeTasksItems: BlockItemType[] = [
-    {title: "Execute Task", content: ""},
-    {title: "Review Task Output", content: ""},
-    {title: "Interact with LLM", content: ""},
+    {title: "1.Execute Task", content: ""},
+    {title: "2.Review Task Output", content: ""},
+    {title: "3.Review Task Output", content: ""},
+    {title: "4.Interact with LLM", content: ""},
 ];
 
 export const initialTaskExcutedItems: TabsGroupItemType[] = [

@@ -11,12 +11,6 @@ export const AsiderTask = () => {
           </span>
         </div>
       </div>
-      <div className="flex-1 overflow-y-auto">
-        <div className="flex flex-col items-center gap-10 p-4">
-          <TaskCreateNewTask />
-          <TaskRunTask />
-        </div>
-      </div>
     </div>
   );
 };

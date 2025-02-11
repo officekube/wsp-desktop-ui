@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { Block } from "../Block";
-import { TabsGroup } from "../TapsGroup";
-import type { TabsGroupItemType } from "../TapsGroup";
+import { TabsGroup } from "../TabsGroup";
+import type { TabsGroupItemType } from "../TabsGroup";
 
 interface ExcuteProps {
   items: TabsGroupItemType[];
