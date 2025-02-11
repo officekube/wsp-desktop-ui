@@ -25,7 +25,7 @@ export const CheckboxGroup: FC<CheckboxGroupProps> = ({
               type="checkbox"
               name={item.label}
               checked={item.value}
-              onClick={() => handleChecked(index)}
+              onChange={() => handleChecked(index)} // Use onChange
             />
           </label>
         </div>
