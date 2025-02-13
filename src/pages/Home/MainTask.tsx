@@ -13,7 +13,7 @@ export const MainTask = () => {
             <div className="flex-1 overflow-y-auto">
                 <div className="flex flex-col gap-10 p-4">
                     <TaskWelcomeView items={welcomeTasksItems} />
-                    <TaskExplore items={welcomeTasksExploreItems} />
+                    <TaskExplore items={welcomeTasksExploreItems} showSearch={false} />
                     <TaskExploreApps items={initialTaskExcutedItems} />
                 </div>
             </div>

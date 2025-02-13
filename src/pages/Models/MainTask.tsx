@@ -1,16 +1,15 @@
 import React from "react";
 import "./style.css";
 import {
-  initialTasksExploreItems,
-  initialTaskExcutedItems,
+    aiModels,
 } from "../../constant/component-items";
-import { TaskExplore, TaskExcute } from "../../components/common";
+import {ModelExplorer} from "../../components/common";
+
 
 export const MainTask = () => {
-  return (
-    <div className="w-full flex flex-col gap-10">
-      <TaskExplore items={initialTasksExploreItems} />
-      <TaskExcute items={initialTaskExcutedItems} />
-    </div>
-  );
+    return (
+        <div className="w-full flex flex-col gap-10">
+            <ModelExplorer models={aiModels}/>
+        </div>
+    );
 };

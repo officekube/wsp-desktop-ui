@@ -1,5 +1,6 @@
 export {Block} from "./Block";
-export {TaskExplore, TaskExcute, TaskCreateNewTask, TaskRunTask, TaskWelcomeView, TaskExploreApps} from "./Tasks";
+export {TaskExplore, TaskExecute, TaskCreateNewTask, TaskRunTask, TaskWelcomeView, TaskExploreApps} from "./Tasks";
+export {ModelExplorer} from "./ExploreModels";
 export {TabsGroup} from "./TabsGroup";
 export {CheckboxGroup} from "./CheckboxGroup";
 export type {BlockItemType} from "./Block";

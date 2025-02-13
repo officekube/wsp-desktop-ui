@@ -3,14 +3,18 @@ import { Block } from "../Block";
 import { TabsGroup } from "../TabsGroup";
 import type { TabsGroupItemType } from "../TabsGroup";
 
-interface ExcuteProps {
+interface TaskExecuteProps {
   items: TabsGroupItemType[];
+  title?: string;
 }
 
-export const TaskExcute: FC<ExcuteProps> = ({ items }) => {
+export const TaskExecute: FC<TaskExecuteProps> = ({
+  items,
+  title = "Execute Task: Generate Documentation"
+}) => {
   return (
-    <Block title="Excute Task: Generate Documentation">
-      <div className="w-full border border-t-0 border-[#3a3a3a] overflow-x-hidden">
+    <Block title={title}>
+      <div className="w-full border border-t-0 border-gray-700 overflow-x-hidden">
         <TabsGroup items={items} />
       </div>
     </Block>

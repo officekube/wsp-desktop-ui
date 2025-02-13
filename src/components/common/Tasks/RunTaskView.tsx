@@ -1,13 +1,18 @@
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 import { Block } from "../Block";
 import type { CheckboxGroupItemType } from "../CheckboxGroup";
 import { CheckboxGroup } from "../CheckboxGroup";
-import { initialTaskRunTasksItems } from "../../../constant/component-items";
 
-export const TaskRunTask = () => {
-  const [myItems, setMyItems] = useState<CheckboxGroupItemType[]>(
-    initialTaskRunTasksItems
-  );
+interface TaskRunTaskProps {
+  items: CheckboxGroupItemType[];
+  title?: string;
+}
+
+export const TaskRunTask: FC<TaskRunTaskProps> = ({
+  items,
+  title = "Executed/Running Tasks"
+}) => {
+  const [myItems, setMyItems] = useState<CheckboxGroupItemType[]>(items);
 
   const handleChecked = (key: number) => {
     setMyItems((prevItems) =>
@@ -18,8 +23,8 @@ export const TaskRunTask = () => {
   };
 
   return (
-    <Block title="Excuted/Running Tasks">
-      <div className="w-full border border-t-0 border-[#3a3a3a] overflow-x-hidden overflow-y-scroll h-[250px]">
+    <Block title={title}>
+      <div className="w-full border border-t-0 border-gray-700 overflow-x-hidden overflow-y-scroll h-60">
         <CheckboxGroup items={myItems} handleChecked={handleChecked} />
       </div>
     </Block>

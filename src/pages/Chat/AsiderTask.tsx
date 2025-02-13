@@ -1,6 +1,8 @@
 import React from "react";
 import { TaskCreateNewTask, TaskRunTask } from "../../components/common";
-
+import {
+    createNewTaskItems, initialTaskRunTasksItems
+} from "../../constant/component-items";
 export const AsiderTask = () => {
   return (
     <div className="w-full h-screen flex flex-col">
@@ -13,8 +15,8 @@ export const AsiderTask = () => {
       </div>
       <div className="flex-1 overflow-y-auto">
         <div className="flex flex-col items-center gap-10 p-4">
-          <TaskCreateNewTask />
-          <TaskRunTask />
+          <TaskCreateNewTask items={createNewTaskItems}/>
+          <TaskRunTask items={initialTaskRunTasksItems} />
         </div>
       </div>
     </div>

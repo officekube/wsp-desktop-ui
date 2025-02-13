@@ -4,13 +4,13 @@ import {
   initialTasksExploreItems,
   initialTaskExcutedItems,
 } from "../../constant/component-items";
-import { TaskExplore, TaskExcute } from "../../components/common";
+import { TaskExplore, TaskExecute } from "../../components/common";
 
 export const MainTask = () => {
   return (
     <div className="w-full flex flex-col gap-10">
       <TaskExplore items={initialTasksExploreItems} />
-      <TaskExcute items={initialTaskExcutedItems} />
+      <TaskExecute items={initialTaskExcutedItems} />
     </div>
   );
 };
