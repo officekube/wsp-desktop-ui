@@ -1,7 +1,7 @@
 import React from "react";
 import {TaskCreateNewTask, TaskRunTask} from "../../components/common";
 import {
-    createNewTaskItems, initialTaskRunTasksItems
+    initialInstalledModelItems
 } from "../../constant/component-items";
 
 export const AsiderTask = () => {
@@ -16,8 +16,7 @@ export const AsiderTask = () => {
             </div>
             <div className="flex-1 overflow-y-auto">
                 <div className="flex flex-col items-center gap-10 p-4">
-                    <TaskCreateNewTask items={createNewTaskItems}/>
-                    <TaskRunTask items={initialTaskRunTasksItems}/>
+                    <TaskRunTask items={initialInstalledModelItems} title="Installed Models" />
                 </div>
             </div>
         </div>

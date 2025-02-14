@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import {
   Container,
   Header,
@@ -8,22 +9,23 @@ import {
   Main,
   Asider,
 } from "./components/layout";
-import { initialNavItems } from "./constant/component-items";
-import { AsiderTask, MainTask } from "./pages";
+import { initialNavItems, ROUTES } from "./constant/component-items";
 import "./App.css";
 
 function App() {
   const [navItems, setNavItems] = useState<NavItemType[]>(initialNavItems);
+  const navigate = useNavigate();
+
   const handleNavClick = (key: string) => {
-    const navs = navItems.map((item) => {
-      if (item.name === key) {
-        item.active = true;
-      } else {
-        item.active = false;
-      }
-      return item;
-    });
+    const navs = navItems.map((item) => ({
+      ...item,
+      active: item.name === key
+    }));
     setNavItems(navs);
+
+    const route = key.toLowerCase();
+    // Remove the hash from navigate since HashRouter handles it
+    navigate(`/${route}`);
   };
 
   return (
@@ -32,10 +34,28 @@ function App() {
       <Content>
         <Navbar items={navItems} setActive={handleNavClick} />
         <Main>
-          <MainTask />
+          <Routes>
+            <Route path="/" element={<ROUTES.HOME.main />} />
+            {Object.values(ROUTES).map(({ path, main: MainComponent }) => (
+              <Route
+                key={path}
+                path={path}
+                element={<MainComponent />}
+              />
+            ))}
+          </Routes>
         </Main>
         <Asider>
-          <AsiderTask />
+          <Routes>
+            <Route path="/" element={<ROUTES.HOME.aside />} />
+            {Object.values(ROUTES).map(({ path, aside: AsideComponent }) => (
+              <Route
+                key={path}
+                path={path}
+                element={<AsideComponent />}
+              />
+            ))}
+          </Routes>
         </Asider>
       </Content>
     </Container>
