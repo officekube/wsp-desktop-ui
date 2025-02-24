@@ -31,9 +31,6 @@
     "preelectron-pack": "yarn build",
     "start-electron": "electron .",
     "download-runtimes": "node scripts/download-runtimes.js",
-
-
-
     "build": "npm run build-dev && npm run prepare-electron && npm run download-runtimes && electron-builder --x64 --arm64",
     "build-mac-x64": "npm run build-dev && npm run prepare-electron && npm run download-runtimes && electron-builder --mac --x64",
     "build-mac-arm64": "npm run build-dev && npm run prepare-electron && npm run download-runtimes && electron-builder --mac --arm64",
@@ -99,7 +96,7 @@
   },
   "runtimeVersions": {
     "python": "3.12.0",
-    "nodejs": "18.16.0",
+    "nodejs": "20.12.0",
     "robotframework": "6.1.1",
     "jupyter": "7.0.0"
   },
