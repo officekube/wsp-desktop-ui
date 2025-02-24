@@ -123,7 +123,6 @@
     "url": "git+https://github.com/officekube/AI-Workspace.git"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "concurrently": "^9.1.2",
     "electron": "^34.2.0",
     "electron-builder": "^25.1.8",
