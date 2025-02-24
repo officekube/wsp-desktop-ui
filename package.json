@@ -4,6 +4,7 @@
   "private": true,
   "main": "public/electron.js",
   "dependencies": {
+    "electron-squirrel-startup": "^1.0.0",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
@@ -27,17 +28,74 @@
     "electron-dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
     "electron-dev-win": "concurrently \"set BROWSER=none&& npm run start\" \"wait-on http://localhost:3000 && electron .\"",
     "electron-pack": "electron-builder -c.extraMetadata.main=build/electron.js",
-    "preelectron-pack": "yarn build"
+    "preelectron-pack": "yarn build",
+    "download-runtimes": "node scripts/download-runtimes.js",
+    "build-mac-x64": "npm run download-runtimes && electron-builder --mac --x64",
+    "build-mac-arm64": "npm run download-runtimes && electron-builder --mac --arm64",
+    "release": "electron-builder --publish always"
   },
   "build": {
-    "appId": "com.officekube.wsp",
-    "files": [
-      "build/**/*",
-      "node_modules/**/*"
+    "appId": "com.wsp.app",
+    "productName": "WSP Desktop UI",
+    "asar": true,
+    "asarUnpack": [
+      "resources/runtimes/**/*"
     ],
     "directories": {
-      "buildResources": "assets"
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "src/**/*",
+      "resources/**/*",
+      "package.json"
+    ],
+    "mac": {
+      "target": "dmg",
+      "category": "public.app-category.developer-tools",
+      "darkModeSupport": true,
+      "hardenedRuntime": false,
+      "gatekeeperAssess": false,
+      "notarize": false,
+      "artifactName": "${productName}-${version}-${arch}.${ext}",
+      "identity": null
+    },
+    "dmg": {
+      "writeUpdateInfo": false,
+      "format": "UDZO"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "artifactName": "${productName}-Setup-${version}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "useZip": true
+    },
+    "linux": {
+      "target": [
+        "AppImage"
+      ],
+      "artifactName": "${productName}-${version}-${arch}.${ext}"
+    },
+    "publish": {
+      "provider": "github",
+      "releaseType": "release"
     }
+  },
+  "runtimeVersions": {
+    "python": "3.11.0",
+    "nodejs": "18.16.0",
+    "robotframework": "6.1.1",
+    "jupyter": "7.0.0"
   },
   "eslintConfig": {
     "extends": [
@@ -57,12 +115,19 @@
       "last 1 safari version"
     ]
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/officekube/AI-Workspace.git"
+  },
   "devDependencies": {
     "concurrently": "^9.1.2",
     "electron": "^34.2.0",
     "electron-builder": "^25.1.8",
     "electron-is-dev": "^3.0.1",
     "tailwindcss": "3",
-    "wait-on": "^8.0.2"
+    "wait-on": "^8.0.2",
+    "@octokit/rest": "^19.0.7",
+    "axios": "^1.6.0",
+    "extract-zip": "^2.0.1"
   }
 }
