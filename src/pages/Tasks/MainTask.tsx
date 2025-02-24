@@ -1,10 +1,7 @@
 import React from "react";
 import "./style.css";
-import {
-  initialTasksExploreItems,
-  initialTaskExcutedItems,
-} from "../../constant/component-items";
-import { TaskExplore, TaskExecute } from "../../components/common";
+import {initialTaskExcutedItems, initialTasksExploreItems,} from "../../constant/component-items";
+import {TaskExecute, TaskExplore} from "../../components/common";
 
 export const MainTask = () => {
   return (

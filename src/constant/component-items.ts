@@ -1,6 +1,5 @@
 import {NavItemType} from "../components/layout";
-import {BlockItemType, CheckboxGroupItemType} from "../components/common";
-import {TabsGroupItemType} from "../components/common";
+import {BlockItemType, CheckboxGroupItemType, TabsGroupItemType} from "../components/common";
 import * as Home from "../pages/Home";
 import * as Tasks from "../pages/Tasks";
 import * as Apps from "../pages/Apps";
@@ -31,44 +30,44 @@ export const createNewInstallerItems = {
 
 export const ROUTES = {
     HOME: {
-        path: "/home",
-        main: Home.MainTask,
-        aside: Home.AsiderTask
+        Path: "/home",
+        Main: Home.MainTask,
+        Aside: Home.AsiderTask
     },
     TASKS: {
-        path: "/tasks",
-        main: Tasks.MainTask,
-        aside: Tasks.AsiderTask
+        Path: "/tasks",
+        Main: Tasks.MainTask,
+        Aside: Tasks.AsiderTask
     },
     APPS: {
-        path: "/apps",
-        main: Apps.MainTask,
-        aside: Apps.AsiderTask
+        Path: "/apps",
+        Main: Apps.MainTask,
+        Aside: Apps.AsiderTask
     },
     MODELS: {
-        path: "/models",
-        main: Models.MainTask,
-        aside: Models.AsiderTask
+        Path: "/models",
+        Main: Models.MainTask,
+        Aside: Models.AsiderTask
     },
     CHAT: {
-        path: "/chat",
-        main: Chat.MainTask,
-        aside: Chat.AsiderTask
+        Path: "/chat",
+        Main: Chat.MainTask,
+        Aside: Chat.AsiderTask
     },
     SETTINGS: {
-        path: "/settings",
-        main: Settings.MainTask,
-        aside: Settings.AsiderTask
+        Path: "/settings",
+        Main: Settings.MainTask,
+        Aside: Settings.AsiderTask
     }
 } as const;
 
 export const initialNavItems: NavItemType[] = [
-    {name: 'Home', active: true, path: `#${ROUTES.HOME.path}`},
-    {name: 'Tasks', active: false, path: `#${ROUTES.TASKS.path}`},
-    {name: 'Apps', active: false, path: `#${ROUTES.APPS.path}`},
-    {name: 'Models', active: false, path: `#${ROUTES.MODELS.path}`},
-    {name: 'Chat', active: false, path: `#${ROUTES.CHAT.path}`},
-    {name: 'Settings', active: false, path: `#${ROUTES.SETTINGS.path}`},
+    {name: 'Home', active: true, path: `#${ROUTES.HOME.Path}`},
+    {name: 'Tasks', active: false, path: `#${ROUTES.TASKS.Path}`},
+    {name: 'Apps', active: false, path: `#${ROUTES.APPS.Path}`},
+    {name: 'Models', active: false, path: `#${ROUTES.MODELS.Path}`},
+    {name: 'Chat', active: false, path: `#${ROUTES.CHAT.Path}`},
+    {name: 'Settings', active: false, path: `#${ROUTES.SETTINGS.Path}`},
 ];
 
 export const initialTasksExploreItems: BlockItemType[] = [
