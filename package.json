@@ -31,11 +31,14 @@
     "preelectron-pack": "yarn build",
     "start-electron": "electron .",
     "download-runtimes": "node scripts/download-runtimes.js",
-    "build": "electron-builder --x64 --arm64",
-    "build-mac-x64": "electron-builder --mac --x64",
-    "build-mac-arm64": "electron-builder --mac --arm64",
-    "build-win-x64": "electron-builder --win --x64",
-    "release": "electron-builder --publish always"
+
+
+
+    "build": "npm run build-dev && npm run prepare-electron && npm run download-runtimes && electron-builder --x64 --arm64",
+    "build-mac-x64": "npm run build-dev && npm run prepare-electron && npm run download-runtimes && electron-builder --mac --x64",
+    "build-mac-arm64": "npm run build-dev && npm run prepare-electron && npm run download-runtimes && electron-builder --mac --arm64",
+    "build-win-x64": "npm run build-dev && npm run prepare-electron && npm run download-runtimes && electron-builder --win --x64",
+    "release": "npm run build-dev && npm run prepare-electron && npm run download-runtimes && electron-builder --publish always"
   },
   "build": {
     "appId": "com.wsp.app",
