@@ -5,7 +5,6 @@ async function initializeApp() {
     const isDev = (await import('electron-is-dev')).default;
 
     function createWindow() {
-        // Create the browser window.
         const win = new BrowserWindow({
             width: 800,
             height: 600,
@@ -15,14 +14,13 @@ async function initializeApp() {
             },
         });
 
-        // Load the index.html from a url
+        const indexPath = path.join(__dirname, isDev ? '' :'index.html');
         win.loadURL(
             isDev
                 ? 'http://localhost:3000'
-                : `file://${path.join(__dirname, '../build/index.html')}`
+                : `file://${indexPath}`
         );
 
-        // Open the DevTools in development mode.
         if (isDev) {
             win.webContents.openDevTools();
         }
@@ -30,7 +28,6 @@ async function initializeApp() {
 
     app.whenReady().then(createWindow);
 
-    // Quit when all windows are closed.
     app.on('window-all-closed', () => {
         if (process.platform !== 'darwin') {
             app.quit();

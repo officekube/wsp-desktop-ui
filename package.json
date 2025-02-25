@@ -2,7 +2,7 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
-  "main": "public/electron.js",
+  "main": "src/main/index.js",
   "dependencies": {
     "electron-squirrel-startup": "^1.0.0",
     "@testing-library/jest-dom": "^5.14.1",
@@ -22,23 +22,16 @@
     "web-vitals": "^2.1.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start-react": "react-scripts start",
     "build-dev": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "electron-dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
-    "electron-dev-win": "concurrently \"set BROWSER=none&& npm run start\" \"wait-on http://localhost:3000 && electron .\"",
-    "electron-pack": "electron-builder -c.extraMetadata.main=public/electron.js",
-    "preelectron-pack": "yarn build-dev",
-    "start-electron": "electron .",
+    "start": "electron .",
     "download-runtimes": "node scripts/download-runtimes.js",
-    "prepare-electron": "cp -r public/electron.js build/electron.js && cp -r public/preload.js build/preload.js",
-    "build": "npm run build-dev && npm run prepare-electron && npm run download-runtimes && electron-builder --x64 --arm64",
-    "build-mac-x64": "npm run build-dev && npm run prepare-electron && electron-builder --mac --x64",
-    "build-mac-x64-2": "npm run build-dev && npm run prepare-electron && npm run download-runtimes && electron-builder --mac --x64",
-    "build-mac-arm64": "npm run build-dev && npm run prepare-electron && npm run download-runtimes && electron-builder --mac --arm64",
-    "build-win-x64": "npm run build-dev && npm run prepare-electron && npm run download-runtimes && electron-builder --win --x64",
-    "release": "npm run build-dev && npm run prepare-electron && npm run download-runtimes && electron-builder --publish always"
+    "build": "electron-builder --x64 --arm64",
+    "build-mac-x64": "electron-builder --mac --x64",
+    "build-mac-arm64": "electron-builder --mac --arm64",
+    "build-win-x64": "electron-builder --win --x64",
+    "release": "electron-builder --publish always"
   },
   "build": {
     "appId": "com.wsp.app",
@@ -52,7 +45,7 @@
       "buildResources": "build"
     },
     "files": [
-      "build/**/*",
+      "src/**/*",
       "resources/**/*",
       "package.json"
     ],
