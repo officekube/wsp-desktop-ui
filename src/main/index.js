@@ -5,8 +5,13 @@ if (require('electron-squirrel-startup')) {
   app.quit();
 }
 
+let mainWindow = null;
+
 function createWindow() {
-  const mainWindow = new BrowserWindow({
+  // Avoid creating multiple windows unnecessarily
+  if (mainWindow) return;
+
+  mainWindow = new BrowserWindow({
     width: 1200,
     height: 800,
     webPreferences: {
@@ -17,14 +22,32 @@ function createWindow() {
   });
 
   if (process.env.NODE_ENV === 'development') {
-    mainWindow.loadURL('http://localhost:3000'); // React dev server
-    mainWindow.webContents.openDevTools();
+    mainWindow.loadURL('http://localhost:3000')
+    .then(() => {
+      mainWindow.webContents.openDevTools();
+    })
+    .catch((err) => {
+      console.error('Failed to load URL:', err);
+    });
   } else {
-    mainWindow.loadFile(path.join(__dirname, '../../build/index.html')); // Built React app
+    mainWindow.loadFile(path.join(__dirname, '../../build/index.html'))
+    .catch((err) => {
+      console.error('Failed to load file:', err);
+    });
   }
+
+  // Clean up mainWindow reference when closed
+  mainWindow.on('closed', () => {
+    mainWindow = null;
+  });
 }
 
-app.whenReady().then(createWindow);
+// Ensure the app is ready before creating the window
+app.whenReady().then(() => {
+  createWindow();
+}).catch((err) => {
+  console.error('App failed to start:', err);
+});
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
