@@ -12,6 +12,7 @@ const root = ReactDOM.createRoot(
 root.render(
     <React.StrictMode>
         <HashRouter>
+            <div>Test Render</div>
             <App />
         </HashRouter>
     </React.StrictMode>
