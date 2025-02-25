@@ -13,9 +13,9 @@ async function updateReleaseNotes() {
 
   // Extract owner and repo from the repository URL
   const [owner, repo] = repoUrl
-    .replace('git+https://github.com/', '')
-    .replace('.git', '')
-    .split('/');
+  .replace('git+https://github.com/', '')
+  .replace('.git', '')
+  .split('/');
 
   try {
     // Get the latest release by tag
@@ -34,10 +34,10 @@ async function updateReleaseNotes() {
     const windowsAsset = release.assets.find(a =>
       a.name.toLowerCase().endsWith('.exe')
     );
-    const macIntelAsset = release.assets.find(a =>
+    const macMAsset = release.assets.find(a =>
       a.name.toLowerCase().includes('x64') && a.name.toLowerCase().endsWith('.dmg')
     );
-    const macArmAsset = release.assets.find(a =>
+    const macIntelAsset = release.assets.find(a =>
       a.name.toLowerCase().includes('arm64') && a.name.toLowerCase().endsWith('.dmg')
     );
     const linuxAsset = release.assets.find(a =>
@@ -51,8 +51,8 @@ async function updateReleaseNotes() {
     const macIntelDownload = macIntelAsset
       ? `[macOS Installer (Intel)](${macIntelAsset.browser_download_url})`
       : 'macOS Installer (Intel) (not available)';
-    const macArmDownload = macArmAsset
-      ? `[macOS Installer (Apple Silicon)](${macArmAsset.browser_download_url})`
+    const macArmDownload = macMAsset
+      ? `[macOS Installer (Apple Silicon)](${macMAsset.browser_download_url})`
       : 'macOS Installer (Apple Silicon) (not available)';
     const linuxDownload = linuxAsset
       ? `[Linux Installer](${linuxAsset.browser_download_url})`
@@ -101,7 +101,8 @@ ${release.body || ''}`;
         content: Buffer.from(releaseNotes).toString('base64'),
         sha: existingFile.sha
       });
-    } catch (error) {
+    }
+    catch (error) {
       if (error.status === 404) {
         // File doesn't exist, create it
         await octokit.repos.createOrUpdateFileContents({
@@ -117,7 +118,8 @@ ${release.body || ''}`;
     }
 
     console.log('Release notes updated successfully!');
-  } catch (error) {
+  }
+  catch (error) {
     console.error('Error updating release notes:', error.message);
     if (error.response) {
       console.error('API Response:', error.response.data);
