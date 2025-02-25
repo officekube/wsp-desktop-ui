@@ -1,15 +1,7 @@
-import React, { useState } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
-import {
-  Container,
-  Header,
-  Navbar,
-  NavItemType,
-  Content,
-  Main,
-  Asider,
-} from "./components/layout";
-import { initialNavItems, ROUTES } from "./constant/component-items";
+import React, {useState} from "react";
+import {Route, Routes, useNavigate} from "react-router-dom";
+import {Asider, Container, Content, Header, Main, Navbar, NavItemType,} from "./components/layout";
+import {initialNavItems, ROUTES} from "./constant/component-items";
 import "./App.css";
 
 function App() {
@@ -24,7 +16,6 @@ function App() {
     setNavItems(navs);
 
     const route = key.toLowerCase();
-    // Remove the hash from navigate since HashRouter handles it
     navigate(`/${route}`);
   };
 
@@ -35,11 +26,11 @@ function App() {
         <Navbar items={navItems} setActive={handleNavClick} />
         <Main>
           <Routes>
-            <Route path="/" element={<ROUTES.HOME.main />} />
-            {Object.values(ROUTES).map(({ path, main: MainComponent }) => (
+            <Route path="/" element={<ROUTES.HOME.Main />} />
+            {Object.values(ROUTES).map(({ Path, Main: MainComponent }) => (
               <Route
-                key={path}
-                path={path}
+                key={Path}
+                path={Path}
                 element={<MainComponent />}
               />
             ))}
@@ -47,11 +38,11 @@ function App() {
         </Main>
         <Asider>
           <Routes>
-            <Route path="/" element={<ROUTES.HOME.aside />} />
-            {Object.values(ROUTES).map(({ path, aside: AsideComponent }) => (
+            <Route path="/" element={<ROUTES.HOME.Aside />} />
+            {Object.values(ROUTES).map(({ Path, Aside: AsideComponent }) => (
               <Route
-                key={path}
-                path={path}
+                key={Path}
+                path={Path}
                 element={<AsideComponent />}
               />
             ))}

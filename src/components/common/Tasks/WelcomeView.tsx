@@ -1,6 +1,6 @@
-import React, { FC } from "react";
-import { Block } from "../Block";
-import type { BlockItemType } from "../Block";
+import React, {FC} from "react";
+import type {BlockItemType} from "../Block";
+import {Block} from "../Block";
 
 interface TaskWelcomeProps {
   items: BlockItemType[];

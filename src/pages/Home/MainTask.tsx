@@ -1,8 +1,8 @@
 import React from "react";
 import "./style.css";
 import {
-    welcomeTasksExploreItems,
     initialTaskExcutedItems,
+    welcomeTasksExploreItems,
     welcomeTasksItems
 } from "../../constant/component-items";
 import {TaskExplore, TaskExploreApps, TaskWelcomeView} from "../../components/common";
