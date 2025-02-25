@@ -11,6 +11,7 @@ function createWindow() {
   // Avoid creating multiple windows unnecessarily
   if (mainWindow) return;
 
+
   mainWindow = new BrowserWindow({
     width: 1200,
     height: 800,
