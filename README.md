@@ -1,6 +1,6 @@
-# AI Workspace Desktop UI
+# WSP Desktop UI
 
-AI Workspace User Interface is a desktop application that allows users to access and use features of the AI Workspace to power their workflows with AI.
+WSP Desktop User Interface is a desktop application that allows users to access and use features of the AI Workspace to power their workflows with AI.
 
 ## Getting Started
 
