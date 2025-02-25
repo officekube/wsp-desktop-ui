@@ -228,10 +228,3 @@ jobs:
           fail_on_unmatched_files: false
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Update Release Notes
-        run: |
-          npm install @octokit/rest
-          RELEASE_TAG=${{ needs.prepare-tag.outputs.tag }} node scripts/update-release.js
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
