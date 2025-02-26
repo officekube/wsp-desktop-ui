@@ -9,6 +9,12 @@ on:
   pull_request:
     branches:
       - 'feature/**'
+  workflow_dispatch: # Added for manual trigger
+    inputs:
+      custom_tag:
+        description: 'Optional custom tag for the build (e.g., v1.0.0-custom)'
+        required: false
+        type: string
 
 permissions:
   contents: write
