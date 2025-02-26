@@ -1,0 +1,46 @@
+name: Build and Zip UI
+
+on:
+  push:
+    tags:
+      - 'v*'
+    branches:
+      - 'feature/**'
+  pull_request:
+    branches:
+      - 'feature/**'
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-zip:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18.x'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build React App
+        run: npm run build:react  # Creates 'build' folder
+
+      - name: Zip Build Output
+        run: |
+          zip -r wsp-desktop-ui-build.zip build/
+        working-directory: .
+
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: wsp-desktop-ui-build-${{ github.ref_name }}  # Tag-specific artifact name
+          path: wsp-desktop-ui-build.zip
+          retention-days: 30  # Keep artifact for 30 days (adjust as needed)
