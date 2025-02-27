@@ -1,0 +1,79 @@
+name: Build and Zip UI
+
+on:
+  push:
+    tags:
+      - 'v*'
+    branches:
+      - 'feature/**'
+  pull_request:
+    branches:
+      - 'feature/**'
+  workflow_dispatch:
+    inputs:
+      custom_tag:
+        description: 'Optional custom tag for the build (e.g., v1.0.0-custom)'
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-zip:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build React App
+        run: npm run build:react  # Creates 'build' folder in root
+
+      - name: Determine Artifact Tag
+        id: set_tag
+        run: |
+          if [ -n "${{ github.event.inputs.custom_tag }}" ]; then
+            TAG=$(echo "${{ github.event.inputs.custom_tag }}" | tr '/' '-')
+          elif [[ "${GITHUB_REF}" == refs/tags/* ]]; then
+            TAG="${GITHUB_REF##*/}"
+          else
+            REF_NAME=$(echo "${{ github.ref_name }}" | tr '/' '-')
+            TAG="v0.0.0-${REF_NAME}-$(date +%s)"
+          fi
+          echo "Using tag: $TAG"
+          echo "artifact_tag=$TAG" >> $GITHUB_OUTPUT
+        shell: bash
+
+      - name: Create Artifact Directory
+        run: |
+          mkdir -p artifact
+          cp -r build artifact/
+          cp -r public artifact/
+          mkdir -p artifact/src/main artifact/src/preload
+          cp src/main/index.js artifact/src/main/
+          cp src/preload/index.js artifact/src/preload/
+          cp package.json artifact/
+          cp electron-builder.yml artifact/
+        working-directory: .
+
+      - name: Zip Artifact
+        run: |
+          zip -r wsp-desktop-ui-full.zip artifact/
+        working-directory: .
+
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: wsp-desktop-ui-full-${{ steps.set_tag.outputs.artifact_tag }}
+          path: wsp-desktop-ui-full.zip
+          retention-days: 30
