@@ -1,5 +1,5 @@
 appId: com.wsp.app
-productName: WSP Desktop UI
+productName: OfficeKube AI Workspace
 
 directories:
   output: dist
@@ -39,7 +39,7 @@ nsis:
   allowToChangeInstallationDirectory: true
   createDesktopShortcut: true
   createStartMenuShortcut: true
-  shortcutName: WSP Desktop UI
+  shortcutName: OfficeKube AI Workspace
 
 dmg:
   contents:

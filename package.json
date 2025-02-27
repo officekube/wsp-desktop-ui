@@ -18,7 +18,7 @@
   "homepage": "./",
   "build": {
     "appId": "com.aidesktop.app",
-    "productName": "OfficeKube WSP Desktop UI",
+    "productName": "OfficeKube AI Workspace",
     "asar": true,
     "asarUnpack": [
       "resources/runtimes/**/*"
