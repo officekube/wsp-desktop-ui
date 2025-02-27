@@ -9,7 +9,7 @@ on:
   pull_request:
     branches:
       - 'feature/**'
-  workflow_dispatch: # Added for manual trigger
+  workflow_dispatch:
     inputs:
       custom_tag:
         description: 'Optional custom tag for the build (e.g., v1.0.0-custom)'
@@ -37,16 +37,43 @@ jobs:
         run: npm ci
 
       - name: Build React App
-        run: npm run build:react  # Creates 'build' folder
+        run: npm run build:react  # Creates 'build' folder in root
 
-      - name: Zip Build Output
+      - name: Determine Artifact Tag
+        id: set_tag
         run: |
-          zip -r wsp-desktop-ui-build.zip build/
+          if [ -n "${{ github.event.inputs.custom_tag }}" ]; then
+            TAG=$(echo "${{ github.event.inputs.custom_tag }}" | tr '/' '-')
+          elif [[ "${GITHUB_REF}" == refs/tags/* ]]; then
+            TAG="${GITHUB_REF##*/}"
+          else
+            REF_NAME=$(echo "${{ github.ref_name }}" | tr '/' '-')
+            TAG="v0.0.0-${REF_NAME}-$(date +%s)"
+          fi
+          echo "Using tag: $TAG"
+          echo "artifact_tag=$TAG" >> $GITHUB_OUTPUT
+        shell: bash
+
+      - name: Create Artifact Directory
+        run: |
+          mkdir -p artifact
+          cp -r build artifact/
+          cp -r public artifact/
+          mkdir -p artifact/src/main artifact/src/preload
+          cp src/main/index.js artifact/src/main/
+          cp src/preload/index.js artifact/src/preload/
+          cp package.json artifact/
+          cp electron-builder.yml artifact/
+        working-directory: .
+
+      - name: Zip Artifact
+        run: |
+          zip -r wsp-desktop-ui-full.zip artifact/
         working-directory: .
 
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: wsp-desktop-ui-build-${{ github.ref_name }}  # Tag-specific artifact name
-          path: wsp-desktop-ui-build.zip
-          retention-days: 30  # Keep artifact for 30 days (adjust as needed)
+          name: wsp-desktop-ui-full-${{ steps.set_tag.outputs.artifact_tag }}
+          path: wsp-desktop-ui-full.zip
+          retention-days: 30
