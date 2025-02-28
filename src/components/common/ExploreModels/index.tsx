@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC} from 'react';
 import {SearchHeader} from "../../layout/Search";
 import {ModelCard} from "../../layout/Card";
 import {Block} from "../Block";

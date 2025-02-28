@@ -1,8 +1,7 @@
 import React from "react";
-import { TaskCreateNewTask, TaskRunTask } from "../../components/common";
-import {
-    createNewTaskItems, initialTaskRunTasksItems
-} from "../../constant/component-items";
+import {TaskCreateNewTask, TaskRunTask} from "../../components/common";
+import {createNewTaskItems, initialTaskRunTasksItems} from "../../constant/component-items";
+
 export const AsiderTask = () => {
   return (
     <div className="w-full h-screen flex flex-col">

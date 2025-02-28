@@ -1,7 +1,7 @@
-import React, { FC, useState } from "react";
-import { Block } from "../Block";
-import type { CheckboxGroupItemType } from "../CheckboxGroup";
-import { CheckboxGroup } from "../CheckboxGroup";
+import React, {FC, useState} from "react";
+import {Block} from "../Block";
+import type {CheckboxGroupItemType} from "../CheckboxGroup";
+import {CheckboxGroup} from "../CheckboxGroup";
 
 interface TaskRunTaskProps {
   items: CheckboxGroupItemType[];

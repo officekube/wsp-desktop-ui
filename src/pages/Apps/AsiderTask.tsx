@@ -1,8 +1,6 @@
 import React from "react";
 import {TaskCreateNewTask, TaskRunTask} from "../../components/common";
-import {
-    createNewInstallerItems, initialInstalledAppItems
-} from "../../constant/component-items";
+import {createNewInstallerItems, initialInstalledAppItems} from "../../constant/component-items";
 
 export const AsiderTask = () => {
     return (
