@@ -1,8 +1,6 @@
 import React from "react";
 import "./style.css";
-import {
-    aiModels,
-} from "../../constant/component-items";
+import {aiModels,} from "../../constant/component-items";
 import {ModelExplorer} from "../../components/common";
 
 

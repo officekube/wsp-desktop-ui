@@ -1,5 +1,5 @@
-import React, {FC, useState} from 'react';
-import {Search, Filter} from 'lucide-react';
+import React, {FC} from 'react';
+import {Filter, Search} from 'lucide-react';
 
 export const SearchHeader: FC = () => {
     return (
