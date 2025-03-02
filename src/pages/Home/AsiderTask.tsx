@@ -2,8 +2,8 @@ import React from "react";
 
 export const AsiderTask = () => {
   const videos = [
-    { url: "https://youtu.be/9lE0zw-cknE", title: "Overview of OfficeKube platform" },
-    { url: "https://youtu.be/s-DM6bofRzo", title: "Use of a Workspace" },
+    { url: "https://youtu.be/9lE0zw-cknE", title: "Use of a Workspace" },
+    { url: "https://youtu.be/s-DM6bofRzo", title: "Overview of OfficeKube platform" },
   ];
 
   // Function to extract YouTube video ID
