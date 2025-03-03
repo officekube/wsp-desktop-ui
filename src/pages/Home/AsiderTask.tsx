@@ -1,11 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 
 export const AsiderTask = () => {
-  const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
-
   const videos = [
-    { url: "https://youtu.be/9lE0zw-cknE", title: "Overview of OfficeKube platform" },
-    { url: "https://youtu.be/s-DM6bofRzo", title: "Use of a Workspace" },
+    { url: "https://youtu.be/9lE0zw-cknE", title: "Use of a Workspace" },
+    { url: "https://youtu.be/s-DM6bofRzo", title: "Overview of OfficeKube platform" },
   ];
 
   // Function to extract YouTube video ID
@@ -16,13 +14,67 @@ export const AsiderTask = () => {
     return match ? match[1] : null;
   };
 
+  // open the video in a new tab inside a dimensioned container
+  const openVideoTab = (videoId: string) => {
+    const videoUrl = `https://www.youtube.com/embed/${videoId}`;
+    const newTab = window.open("", "_blank");
+
+    if (newTab) {
+      newTab.document.write(`
+        <html>
+          <head>
+            <title>Video Player</title>
+            <style>
+              body {
+                margin: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                background-color: black;
+              }
+              .container {
+                width: 80vw;
+                max-width: 900px;
+                height: 60vh;
+                background: #000;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 10px;
+                box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.2);
+                padding: 20px;
+              }
+              iframe {
+                width: 100%;
+                height: 100%;
+                border-radius: 10px;
+              }
+            </style>
+          </head>
+          <body>
+            <div class="container">
+              <iframe 
+                src="${videoUrl}" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+              </iframe>
+            </div>
+          </body>
+        </html>
+      `);
+      newTab.document.close();
+    }
+  };
+
   return (
     <div className="w-full h-screen flex flex-col">
       {/* Header */}
       <div className="w-full flex-none py-8">
         <div className="flex items-center justify-center">
           <span className="text-white/60 text-base font-semibold">
-            YTF Tutorial Gallery
+            YT Tutorial Gallery
           </span>
         </div>
       </div>
@@ -37,7 +89,7 @@ export const AsiderTask = () => {
             <div
               key={videoId}
               className="cursor-pointer"
-              onClick={() => setSelectedVideo(videoId)}
+              onClick={() => openVideoTab(videoId)}
             >
               <img
                 className="w-full max-w-xs rounded-lg shadow-lg"
@@ -51,28 +103,6 @@ export const AsiderTask = () => {
           );
         })}
       </div>
-
-      {/* Video Modal */}
-      {selectedVideo && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
-          onClick={() => setSelectedVideo(null)}
-        >
-          <div
-            className="bg-black p-2 rounded-lg shadow-lg"
-            onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside the modal
-          >
-            <iframe
-              className="w-[95vw] max-w-3xl h-[65vh] md:h-[75vh] rounded-lg"
-              src={`https://www.youtube.com/embed/${selectedVideo}`}
-              title="YouTube Video"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
